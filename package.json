@@ -593,6 +593,11 @@
                 "description": "Optional: The computer name to which a remote session will be established.",
                 "default": null
               },
+              "createTemporaryIntegratedConsole": {
+                "type": "boolean",
+                "description": "Determines whether a temporary PowerShell Extension Terminal is created for each debugging session, useful for debugging PowerShell classes and binary modules.  Overrides the user setting 'powershell.debugging.createTemporaryIntegratedConsole'.",
+                "default": false
+              },
               "processId": {
                 "type": "number",
                 "description": "Optional: The ID of the PowerShell host process that should be attached. Will prompt if unspecified.",
@@ -612,6 +617,24 @@
                 "type": "string",
                 "description": "The custom pipe name of the PowerShell host process to attach to.",
                 "default": null
+              },
+              "pathMappings": {
+                "type": "array",
+                "description": "Optional: An array of path mappings to use when attaching to a remote PowerShell host process. Each mapping is an object with 'localRoot' and 'remoteRoot' properties.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "localRoot": {
+                      "type": "string",
+                      "description": "The local file system path to map."
+                    },
+                    "remoteRoot": {
+                      "type": "string",
+                      "description": "The remote file system path to map."
+                    }
+                  }
+                },
+                "default": []
               }
             }
           }

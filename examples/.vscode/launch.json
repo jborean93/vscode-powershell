@@ -2,6 +2,45 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Ansible PowerShell Debugger",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "/home/jborean/dev/ansible/bin/ansible-pwsh.ps1",
+      "args": [],
+      "cwd": "/home/jborean/dev/ansible",
+      "serverReadyAction": {
+        "action": "startDebugging",
+        "pattern": "Listening for debug request on port \\d+",
+        "name": "Ansible Launch Debugger Environment"
+      }
+    },
+    {
+      "name": "Ansible Launch Debugger Environment",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "/home/jborean/dev/ansible/bin/ansible-debug.py",
+      "args": [
+        "server2022.domain.test"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "/home/jborean/dev/ansible-tester",
+    },
+    {
+      "name": "PowerShell Attach to Host Process",
+      "type": "PowerShell",
+      "request": "attach",
+      "processId": "${command:PickPSHostProcess}",
+      "postAttachScript": "New-Event -SourceIdentifier foo -ErrorAction Stop",
+      "runspaceId": 1,
+      "internalConsoleOptions":
+      // "pathMappings": [
+      //   {
+      //     "localRoot": "/home/jborean/dev/ansible_collections/ansible/windows/plugins/modules/",
+      //     "remoteRoot": "ansible_collections.ansible.windows.plugins.modules.",
+      //   }
+      // ]
+    },
+    {
       "type": "PowerShell",
       "request": "launch",
       "name": "PowerShell Launch Current File",
@@ -23,7 +62,9 @@
       "request": "launch",
       "name": "PowerShell Launch Current File w/Args Prompt",
       "script": "${file}",
-      "args": ["${command:SpecifyScriptArgs}"],
+      "args": [
+        "${command:SpecifyScriptArgs}"
+      ],
       "cwd": "${file}"
     },
     {
@@ -31,7 +72,9 @@
       "request": "launch",
       "name": "PowerShell Launch DebugTest.ps1",
       "script": "${workspaceRoot}/DebugTest.ps1",
-      "args": ["-Count 55 -DelayMilliseconds 250"],
+      "args": [
+        "-Count 55 -DelayMilliseconds 250"
+      ],
       "cwd": "${workspaceRoot}"
     },
     {
@@ -55,5 +98,5 @@
       "processId": "${command:PickPSHostProcess}",
       "runspaceId": 1
     }
-  ]
+  ],
 }

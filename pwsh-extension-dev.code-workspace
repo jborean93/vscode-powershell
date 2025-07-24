@@ -346,7 +346,7 @@
         "type": "coreclr",
         "request": "attach",
         "processId": "${command:PowerShell.PickPSHostProcess}",
-        "justMyCode": true,
+        "justMyCode": false,
         "suppressJITOptimizations": true,
         "symbolOptions": {
           "searchPaths": [],
@@ -369,7 +369,7 @@
         "request": "attach",
         // Waits for the extension terminal to become available and gets the PID, saves having to enter it manually.
         "processId": "${command:PowerShell.WaitForPsesActivationAndReturnProcessId}",
-        "justMyCode": true,
+        "justMyCode": false,
         "suppressJITOptimizations": true,
         "symbolOptions": {
           "searchPaths": [],
